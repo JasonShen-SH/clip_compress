@@ -19,6 +19,19 @@ Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 ### Try compressing image features of pretrained CLIP encoder
 
 #### Image feature quantization
+Post-train Quantization (PTQ)
+| All digits     | Integer digits                                                                      |
+|----------------|---------------------------|----
+| 12             | 8                          |                                                                                 |
+| After Pruning                              | 80% (1 - 20%)             | Model size and Conv2d parameters reduced to 80% of original sizes.              |
+| After Post-Prune Quantization              | 20% (80% * 25%)           | Further reduced to a quarter of its original size with 8-bit storage.           |
+| After Huffman Encoding                     | 7.34% (20% * 36.7%)       | Further reduced to 36.7% of its post-quantization size.                         |
+| **Number of Conv2d Parameters & FLOPs Reduction**    |                 |                                                                                 |
+| Conv2d Parameters (After Pruning)      | 80% (1 - 20%)                         | Precisely reduced to 20% of their original sizes.                               |
+| Conv2d FLOPs (After Pruning)           | 44.6% (1 - 55.4%)                     | Reduction can far exceed 10%, due to zeroed weights.                            |
+| **Validation Accuracy**                    |                           |                                                                                 |
+| Post Fine-Tuning                           | 93.34%                    | Slightly higher than the pre-trained model's 93.32% validation accuracy.        |
+
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
 Initially, CLIP conducts inference using 512-dimensional image and text features necessary for zero-shot inference. However, after feature dimensionality reduction, direct inference using the pre-trained CLIP model is not feasible. Instead, a simple classifier is constructed for backend classification tasks. This involves examining if using the reduced features, after minimal training (like 10 epochs), can perform classification effectively. The process includes:
