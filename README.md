@@ -1,5 +1,11 @@
+# CLIP Compress
 
-The paper "Understanding the Vulnerability of CLIP to Image Compression" highlights various methods to address the susceptibility of CLIP, a model trained on over 400 million image-text pairs, to image compression. Here's an overview of the proposed methods translated into English:
+# Literature Review
+The paper **"Understanding the Vulnerability of CLIP to Image Compression"** highlights the sensitivity of CLIP regarding jpeg compression of imgs when performing zero-shot recognition task.
+<img src="imgs/cifar10.png" width=800>
+<img src="imgs/stl10.png" width=800>
+
+, a model trained on over 400 million image-text pairs, to image compression. Here's an overview of the proposed methods translated into English:
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
 Initially, CLIP conducts inference using 512-dimensional image and text features necessary for zero-shot inference. However, after feature dimensionality reduction, direct inference using the pre-trained CLIP model is not feasible. Instead, a simple classifier is constructed for backend classification tasks. This involves examining if using the reduced features, after minimal training (like 10 epochs), can perform classification effectively. The process includes:
