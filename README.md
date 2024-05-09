@@ -10,7 +10,6 @@ The paper **"Understanding the Vulnerability of CLIP to Image Compression"** hig
 
 
 
-
 , a model trained on over 400 million image-text pairs, to image compression. Here's an overview of the proposed methods translated into English:
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
