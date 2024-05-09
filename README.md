@@ -6,7 +6,7 @@ The paper **"Understanding the Vulnerability of CLIP to Image Compression"** hig
   <img src="imgs/cifar10.png" width="500">
   <img src="imgs/stl10.png" width="500">
 </div>
-<p style="text-align: center;">Average precision of CLIP predictions over the test dataset from cifar10/stl10 across different image qualities.</p>
+<code><p style="text-align: center;">Average precision of CLIP predictions over the test dataset from cifar10/stl10 across different image qualities.</p></code>
 
 
 
