@@ -6,9 +6,11 @@ The paper **"Understanding the Vulnerability of CLIP to Image Compression"** hig
   <img src="imgs/cifar10.png" width="500">
   <img src="imgs/stl10.png" width="500">
 </div>
-<code>Average precision of CLIP predictions over the test dataset from cifar10/stl10 across different image qualities</code>
+<p style="text-align: center;">Average precision of CLIP predictions over the test dataset from cifar10/stl10 across different image qualities.</p>
 
+The performance decline due to JPEG compression is much more significant for the CIFAR10 dataset compared to STL10, where the decrease is not particularly notable. 
 
+The authors did not analyze this aspect in the paper, but we believe it could be attributed to the impact of image size. Since a 32x32 image inherently carries **limited information**, compression leads to a greater loss of detail. Additionally, the compression artifacts introduced by JPEG, such as **blocking effects, are exacerbated**, resulting in poorer performance.
 
 , a model trained on over 400 million image-text pairs, to image compression. Here's an overview of the proposed methods translated into English:
 
