@@ -15,7 +15,7 @@ The authors did not analyze this aspect in the paper, but we believe it could be
 
 Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 
-## Methodologies (Some still improving)
+## Methodologies (I'm improving)
 ### Try compressing image features of pretrained CLIP encoder
 
 #### Image feature quantization
