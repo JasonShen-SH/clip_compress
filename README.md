@@ -1,6 +1,6 @@
 # CLIP Compress
 
-# Literature Review
+## Literature Review
 The paper **"Understanding the Vulnerability of CLIP to Image Compression"** highlights the sensitivity of CLIP regarding jpeg compression of imgs when performing zero-shot recognition task.
 <div style="display: flex; justify-content: space-around;">
   <img src="imgs/cifar10.png" width="500">
@@ -8,11 +8,13 @@ The paper **"Understanding the Vulnerability of CLIP to Image Compression"** hig
 </div>
 <p style="text-align: center;">Average precision of CLIP predictions over the test dataset from cifar10/stl10 across different image qualities.</p>
 
+## Main problems and objectives
 The performance decline due to JPEG compression is much more significant for the CIFAR10 dataset compared to STL10, where the decrease is not particularly notable. 
 
-The authors did not analyze this aspect in the paper, but we believe it could be attributed to the impact of image size. Since a 32x32 image inherently carries **limited information**, compression leads to a greater loss of detail. Additionally, the compression artifacts introduced by JPEG, such as **blocking effects, are exacerbated**, resulting in poorer performance.
+The authors did not analyze this aspect in the paper, but we believe it could be attributed to the impact of **image size**. Since a 32x32 image inherently carries **limited information**, compression leads to a greater loss of detail. Additionally, the compression artifacts introduced by JPEG, such as **blocking effects, are exacerbated**, resulting in poorer performance.
 
-, a model trained on over 400 million image-text pairs, to image compression. Here's an overview of the proposed methods translated into English:
+Therefore, we focus on **improving JPEG Artifact Correction** in our work.
+
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
 Initially, CLIP conducts inference using 512-dimensional image and text features necessary for zero-shot inference. However, after feature dimensionality reduction, direct inference using the pre-trained CLIP model is not feasible. Instead, a simple classifier is constructed for backend classification tasks. This involves examining if using the reduced features, after minimal training (like 10 epochs), can perform classification effectively. The process includes:
