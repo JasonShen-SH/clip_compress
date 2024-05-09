@@ -15,7 +15,7 @@ The authors did not analyze this aspect in the paper, but we believe it could be
 
 Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 
-## Methodologies
+## Methodologies (Some still improving)
 ### Try compressing image features of pretrained CLIP encoder
 
 #### Image feature quantization
@@ -26,6 +26,12 @@ Post-train Quantization (PTQ)
 | 8              | 4               |    88.5%                                     |    94.48%                                           |
 <img src="imgs/quantizer.png" width="500">
 
+
+#### image feature的传输与去噪
+
+这种方法的思想是在发送端将autoencoder编码出的feature进行传输，而不是将经过jpeg compression后的图像本身进行传输；
+<img src="imgs/autoencoder_image.png" width="500">
+<img src="imgs/autoencoder_image_text.png" width="500">
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
 Initially, CLIP conducts inference using 512-dimensional image and text features necessary for zero-shot inference. However, after feature dimensionality reduction, direct inference using the pre-trained CLIP model is not feasible. Instead, a simple classifier is constructed for backend classification tasks. This involves examining if using the reduced features, after minimal training (like 10 epochs), can perform classification effectively. The process includes:
