@@ -24,7 +24,7 @@ Post-train Quantization (PTQ)
 |----------------|-----------------|----------------------------------------------|-----------------------------------------------------|
 | 12             | 8               |    92%                                       |    95.08%                                           |
 | 8              | 4               |    88.5%                                     |    94.48%                                           |
-
+<img src="imgs/quantizer.png" width="500">
 
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
