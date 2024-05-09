@@ -2,8 +2,11 @@
 
 # Literature Review
 The paper **"Understanding the Vulnerability of CLIP to Image Compression"** highlights the sensitivity of CLIP regarding jpeg compression of imgs when performing zero-shot recognition task.
-<img src="imgs/cifar10.png" width=500>
-<img src="imgs/stl10.png" width=500>
+<div style="display: flex; justify-content: space-around;">
+  <img src="imgs/cifar10.png" width="500">
+  <img src="imgs/stl10.png" width="500">
+</div>
+
 
 , a model trained on over 400 million image-text pairs, to image compression. Here's an overview of the proposed methods translated into English:
 
