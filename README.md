@@ -15,6 +15,10 @@ The authors did not analyze this aspect in the paper, but we believe it could be
 
 Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 
+## Methodologies
+### Try compressing image features of pretrained CLIP encoder
+
+#### Image feature quantization
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
 Initially, CLIP conducts inference using 512-dimensional image and text features necessary for zero-shot inference. However, after feature dimensionality reduction, direct inference using the pre-trained CLIP model is not feasible. Instead, a simple classifier is constructed for backend classification tasks. This involves examining if using the reduced features, after minimal training (like 10 epochs), can perform classification effectively. The process includes:
