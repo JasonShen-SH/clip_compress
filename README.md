@@ -27,9 +27,8 @@ Post-train Quantization (PTQ)
 <img src="imgs/quantizer.png" width="500">
 
 
-#### image feature的传输与去噪
-
-这种方法的思想是在发送端将autoencoder编码出的feature进行传输，而不是将经过jpeg compression后的图像本身进行传输；
+#### The denoise of image features
+The method is based on the assumption that image features are transmitted, rather than transmitting the images themselves after undergoing JPEG compression.
 <img src="imgs/autoencoder_image.png" width="500">
 <img src="imgs/autoencoder_image_text.png" width="500">
 
