@@ -16,7 +16,7 @@ The authors did not analyze this aspect in the paper, but we believe it could be
 Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 
 ## Methodologies (I'm improving)
-### Try compressing image features of pretrained CLIP encoder
+### Operations on image features
 
 #### Image feature quantization
 Post-train Quantization (PTQ)
@@ -31,9 +31,34 @@ Post-train Quantization (PTQ)
 The method is based on the assumption that image features are transmitted, rather than transmitting the images themselves after undergoing JPEG compression.
 <img src="imgs/autoencoder_image.png" width="500">
 <img src="imgs/autoencoder_image_text.png" width="500">
+| All digits     | Integer digits  |    Accuracy (CLIP's zero-shot prediction)    |  Classification Accuracy (meta-net for classifier)  |  
+|----------------|-----------------|----------------------------------------------|-----------------------------------------------------|
+| 12             | 8               |    92%                                       |    95.08%                                           |
+| 8              | 4               |    88.5%                                     |    94.48%                                           |
 
 1. Optimizing the Features Extracted by CLIP's Image Encoder
 Initially, CLIP conducts inference using 512-dimensional image and text features necessary for zero-shot inference. However, after feature dimensionality reduction, direct inference using the pre-trained CLIP model is not feasible. Instead, a simple classifier is constructed for backend classification tasks. This involves examining if using the reduced features, after minimal training (like 10 epochs), can perform classification effectively. The process includes:
+
+
+### Operations on image itself 
+1. Based on SRGAN
+As besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We denote this process as the SR(super-resolution process).
+<img src="imgs/SRGAN.png" width="500">
+SRGAN提供多种倍率的放大倍数，包括*2, *4和*8；
+根据cifar10图像是32*32的属性，我们选择*4和*8放大倍数
+Our idea is as follows:
+<img src="imgs/SRGAN_CLIP.png" width="500">
+我们首先将预训练好的SRGAN(G&D）在cifar10数据集上直接做inference:
+| CLIP pretrained model  | SRGAN scale  |  Accuracy (CLIP's zero-shot prediction)  |
+|----------------|-----------------|----------------------------------------------|
+| ViT-B/32       | 4               |    55.474%                                   |
+| ViT-B/32       | 8               |    55.474%                                   |
+|    \           |   \             |    65.09%                                    |
+| RN50           | 4               |    45.968%                                     |  
+| RN50           | 8               |    45.968%                                     |
+|    \           | \               |    56.782%          
+
+我们的方法是，将SRGAN的生成器迁移到cifar10数据集上，即基于
 
 Feature Quantization: Quantizing the number of bits used for each feature. An experiment using 1000 images from the X_test set demonstrated that reducing the precision of features slightly affects test accuracy but can be compensated with a simple meta-net classifier. For instance:
 12 bits integer and 8 bits decimal portion resulted in 92% accuracy with CLIP and 95.08% with the classifier.
