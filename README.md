@@ -56,6 +56,8 @@ Additionally, we have employed a feature size of 128 for the classification task
 
 
 
+<p></p>
+<p></p>
 
 ### Section2: Operations on image itself 
 The core ideas behind operations on image itself is to correct jpeg artifacts at the receiver before going into CLIP's image encoder.
@@ -70,7 +72,7 @@ If no training is involved, inference is directly carried out on the CIFAR10 tes
 
 
 #### Method 2.1: SRGAN_based super resolution
-Paper referred: Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network.
+Paper referred: *Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network*.
 
 Note that besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We tried to combine these two processes as the SR(super-resolution) process.
 
@@ -111,14 +113,13 @@ Therefore, it seems much harder for transfer learning on imageset like CIFAR10.
 If we have to do super-resolution, we might first need to scale the original image, or otherwise the learning would be impossible.
 
 #### Method 2.2: Residual CNN for denoise
-Paper referred: Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising
+Paper referred: *Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising*.
 
 The paper serves as a poineer work in image denoising, we believe it better suited for JPEG artifact correction tasks compared to SRGAN. 
 
 Its approach uses a residual network to estimate the residuals caused by JPEG compression. The images initially undergo a conversion from RGB to YCbCr, followed by the residual network learning the artifacts produced by JPEG quantization.
 
 <img src="imgs/DCNN.png" width="500">
-
 
 We utilize it for artifact correction and scale it to the required CLIP dimensions (224x224) after training. 
 
