@@ -54,6 +54,9 @@ Additionally, we have employed a feature size of 128 for the classification task
 | 73%            |    100%  |
 
 
+
+
+
 ### Section2: Operations on image itself 
 The core ideas behind operations on image itself is to correct jpeg artifacts at the receiver before going into CLIP's image encoder.
 
@@ -113,6 +116,7 @@ Paper referred: Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Im
 The paper serves as a poineer work in image denoising, we believe it better suited for JPEG artifact correction tasks compared to SRGAN. 
 
 Its approach uses a residual network to estimate the residuals caused by JPEG compression. The images initially undergo a conversion from RGB to YCbCr, followed by the residual network learning the artifacts produced by JPEG quantization.
+
 <img src="imgs/DCNN.png" width="500">
 
 
@@ -138,6 +142,7 @@ Note: We've also tested other image artifact correction models, such as **DDRM (
 
 ### Method 2.3: Vision Transformer (train from scratch)
 We've added an ViT decoder at the end of the proposed ViT architecture, this is made to recontruct images from encoded features.
+
 <img src="imgs/vit.png" width="500">
 
 We input the noisy CIFAR10 images with JPEG compression, and train it with the ground truth of clean images. 
