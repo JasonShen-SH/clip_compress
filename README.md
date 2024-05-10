@@ -57,12 +57,12 @@ First, we attempt to perform direct inference on the CIFAR10 dataset using the p
 | ViT-B/32       | 8               |    bicubic  | 55.474%                                   |
 | ViT-B/32       | 4               |    bilinear | 56.224%                                   |
 | ViT-B/32       | 8               |    bilinear | 56.224%                                   |
-|    \           |   \             |  \ |  65.09%   (directly zero-shot inference)              |
+|    \           |   \             |  \ |  65.09%   (directly zero-shot inference)           |
 | RN50           | 4               |    bicubic  | 45.968%                                   |  
-| RN50           | 8               |   bicubic  | 45.968%                                   |
-| RN50           | 4               |    bilinear  | 46.348%                                   |  
+| RN50           | 8               |   bicubic  | 45.968%                                    |
+| RN50           | 4               |    bilinear  | 46.348%                                  |  
 | RN50           | 8               |   bilinear  | 46.348%                                   |
-|    \           |   \             |  \ |  56.782%    (directly zero-shot inference)            |
+|    \           |   \             |  \ |  56.782%    (directly zero-shot inference)         |
 The hidden reason might be that:
 Dataset like ImageNet has original size of 224*224, which makes images of the smallest size (scale=8) 28*28.
 However, the original image size of CIFAR10 is 32*32, which makes its images of the smallest size (scale=8) only 4*4, and could hardly learn anything.
@@ -75,14 +75,19 @@ DCNN Denoise serves as a poineer work in image denoising, better suited for JPEG
 Its approach uses a residual network to estimate the residuals caused by JPEG compression. The images initially undergo a conversion from RGB to YCbCr, followed by the residual network learning the artifacts produced by JPEG quantization.
 <img src="imgs/DCNN.png" width="500">
 
-We conducted transfer learning on the DCNN: training the pretrained model on the CIFAR10 dataset, which had undergone various degrees of JPEG compression (25, 50, 75).
+We conducted transfer learning on the pretrained model. For each jpeg compression quality (25%, 50%, 75%), we trained a specific model.
 | compression quality | SSIM  |  PSNR | 
-|----------------|-----------------|-------------------|
+|-----|--------|---|
 | 25% | 0.9339 | 29.9081 |
 | 50% | 0.9608 | 32.4002 |
 | 75% | 0.9755 | 34.6168 |        
 
+We've also tested other image artifact correction models, such as **DDRM (JPEG Artifact Correction using Denoising Diffusion Restoration Models)**, we're still progressing with it.
 
+### Vision Transformer (from scratch)
+
+
+### CNN-Based Encoder-Decoder
 
 Feature Quantization: Quantizing the number of bits used for each feature. An experiment using 1000 images from the X_test set demonstrated that reducing the precision of features slightly affects test accuracy but can be compensated with a simple meta-net classifier. For instance:
 12 bits integer and 8 bits decimal portion resulted in 92% accuracy with CLIP and 95.08% with the classifier.
