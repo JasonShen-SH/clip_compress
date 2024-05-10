@@ -44,19 +44,19 @@ Initially, CLIP conducts inference using 512-dimensional image and text features
 1. Based on SRGAN
 As besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We denote this process as the SR(super-resolution process).
 <img src="imgs/SRGAN.png" width="500">
-SRGAN提供多种倍率的放大倍数，包括*2, *4和*8；
-根据cifar10图像是32*32的属性，我们选择*4和*8放大倍数
-Our idea is as follows:
+
+SRGAN provides various magnification scales, including <code>*2, *4, and *8</code>. Given the characteristic of CIFAR10 images being 32x32, we opt for *4 and *8 magnification scales. 
+Our approach is as follows:
 <img src="imgs/SRGAN_CLIP.png" width="500">
-我们首先将预训练好的SRGAN(G&D）在cifar10数据集上直接做inference:
+First, we attempt to perform direct inference on the CIFAR10 dataset using a pretrained SRGAN (Generator & Discriminator).
 | CLIP pretrained model  | SRGAN scale  |  Accuracy (CLIP's zero-shot prediction)  |
 |----------------|-----------------|----------------------------------------------|
 | ViT-B/32       | 4               |    55.474%                                   |
 | ViT-B/32       | 8               |    55.474%                                   |
 |    \           |   \             |    65.09%                                    |
 | RN50           | 4               |    45.968%                                   |  
-| RN50           | 8               |    45.968%                                     |
-|    \           | \               |    56.782%          |
+| RN50           | 8               |    45.968%                                   |
+|    \           |   \             |    56.782%                                   |
 
 我们的方法是，将SRGAN的生成器迁移到cifar10数据集上，即基于
 
