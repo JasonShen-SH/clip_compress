@@ -67,6 +67,8 @@ If no training is involved, inference is directly carried out on the CIFAR10 tes
 
 
 #### Method 2.1: SRGAN_based super resolution
+Paper referred: Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network.
+
 Note that besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We tried to combine these two processes as the SR(super-resolution) process.
 
 <img src="imgs/SRGAN.png" width="500">
@@ -105,13 +107,21 @@ Therefore, it seems much harder for transfer learning on imageset like CIFAR10.
 
 If we have to do super-resolution, we might first need to scale the original image, or otherwise the learning would be impossible.
 
-#### Method 2.2: DCNN_Denoise
-DCNN Denoise serves as a poineer work in image denoising, better suited for JPEG artifact correction tasks compared to SRGAN. 
+#### Method 2.2: Residual CNN for denoise
+Paper referred: Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising
+
+The paper serves as a poineer work in image denoising, we believe it better suited for JPEG artifact correction tasks compared to SRGAN. 
 
 Its approach uses a residual network to estimate the residuals caused by JPEG compression. The images initially undergo a conversion from RGB to YCbCr, followed by the residual network learning the artifacts produced by JPEG quantization.
 <img src="imgs/DCNN.png" width="500">
 
-We conducted transfer learning on the pretrained model. For each jpeg compression quality (25%, 50%, 75%), we trained a specific model.
+
+We utilize it for artifact correction and scale it to the required CLIP dimensions (224x224) after training. 
+
+Specifically, we conducted transfer learning on the pretrained model. For each JPEG compression quality level (25%, 50%, 75%), we trained a specific model.
+
+<img src="imgs/dcnn_CLIP.png" width="500">
+
 | compression quality | SSIM  |  PSNR | 
 |-----|--------|---|
 | 25% | 0.9339 | 29.9081 |
@@ -124,8 +134,7 @@ We conducted transfer learning on the pretrained model. For each jpeg compressio
 |50%                   |        66.091%   |
 |75%                   |     73.032%   |
 
-
-We've also tested other image artifact correction models, such as **DDRM (JPEG Artifact Correction using Denoising Diffusion Restoration Models)**, we're still progressing with it.
+Note: We've also tested other image artifact correction models, such as **DDRM (JPEG Artifact Correction using Denoising Diffusion Restoration Models)**, we're still progressing with it.
 
 ### Method 2.3: Vision Transformer (train from scratch)
 We've added an ViT decoder at the end of the proposed ViT architecture, this is made to recontruct images from encoded features.
@@ -150,7 +159,7 @@ However, the model currently achieves rather poor performance (learns nothing), 
 |50%                   |  10%   |
 |75%                   | 10%  |
 
-We've also built a simple encoder-decoder architecture for artifact removal, and it faces the same problem as with vision transformer.
+Note: We've also built a simple encoder-decoder architecture for artifact removal, and it faces the same problem as with vision transformer.
 
 ## Next Step
 So far, the main issue with **Operations on the image itself** is that, even though images can be restored very well (as reflected in MSE and SSIM, as well as visualization results);
@@ -166,28 +175,6 @@ This approach would allow the denoising module to put more emphasis on its perfo
 
 
 
-
-
-
-
-
-Feature Quantization: Quantizing the number of bits used for each feature. An experiment using 1000 images from the X_test set demonstrated that reducing the precision of features slightly affects test accuracy but can be compensated with a simple meta-net classifier. For instance:
-12 bits integer and 8 bits decimal portion resulted in 92% accuracy with CLIP and 95.08% with the classifier.
-8 bits integer and 4 bits decimal portion resulted in 88.5% accuracy with CLIP and 94.48% with the classifier.
-2. Restoring Compressed Images Before Entering the Image Encoder
-2.1 Utilizing Existing General Models for Transfer Learning
-The study refers to several models and techniques for improving the quality of compressed images:
-
-JPEG Artifact Correction using Denoising Diffusion Restoration Models: This approach focuses on correcting artifacts introduced by JPEG compression.
-Beyond a Gaussian Denoiser: This method involves using a deep convolutional neural network (DCNN) for image denoising, which goes beyond traditional Gaussian noise models.
-SRGAN (Super-Resolution Generative Adversarial Network): This method employs a GAN for enhancing the resolution of images to a photo-realistic quality.
-2.2 Building Custom Models Based on Current Datasets
-For datasets like CIFAR-10, creating custom models that manually reconstruct images has been proposed. This could involve designing networks specifically tuned to the characteristics of the dataset and the type of compression used.
-
-3. Addressing Image Noise and Scaling
-Acknowledging that most image transmissions undergo compression which introduces noise, the paper proposes a combined approach of image denoising followed by scaling up to the required size (224*224). This process is treated as a super-resolution task, wherein both denoising and upscaling are handled to restore image quality effectively.
-
-These strategies are designed to enhance the robustness of CLIP against the degradation caused by image compression, ensuring more reliable performance in practical applications where image quality may vary.
 
 
 
