@@ -48,15 +48,26 @@ As besides artifact correction, we also need to scale the image to 224*224 as is
 SRGAN provides various magnification scales, including <code>*2, *4, and *8</code>. Given the characteristic of CIFAR10 images being 32x32, we opt for *4 and *8 magnification scales. 
 Our approach is as follows:
 <img src="imgs/SRGAN_CLIP.png" width="500">
-First, we attempt to perform direct inference on the CIFAR10 dataset using a pretrained SRGAN (Generator & Discriminator).
-| CLIP pretrained model  | SRGAN scale  |  Accuracy (CLIP's zero-shot prediction)  |
-|----------------|-----------------|----------------------------------------------|
-| ViT-B/32       | 4               |    55.474%                                   |
-| ViT-B/32       | 8               |    55.474%                                   |
-|    \           |   \             |    65.09%                                    |
-| RN50           | 4               |    45.968%                                   |  
-| RN50           | 8               |    45.968%                                   |
-|    \           |   \             |    56.782%                                   |
+First, we attempt to perform direct inference on the CIFAR10 dataset using the pretrained SRGAN (Generator & Discriminator).
+(We take the jpeg compression rate of 50% as instance)
+| CLIP pretrained model  | SRGAN scale  |  interpolation method | Accuracy (CLIP's zero-shot prediction)  |  
+|----------------|-----------------|-------------------|--------------------------|
+| ViT-B/32       | 4               |    bicubic  | 55.474%                                   |
+| ViT-B/32       | 8               |    bicubic  | 55.474%                                   |
+| ViT-B/32       | 4               |    bilinear | 56.224%                                   |
+| ViT-B/32       | 8               |    bilinear | 56.224%                                   |
+|    \           |   \             |    65.09%   (directly zero-shot inference)              |
+| RN50           | 4               |    bicubic  | 45.968%                                   |  
+| RN50           | 8               |   bicubic  | 45.968%                                   |
+| RN50           | 4               |    bilinear  | 46.348%                                   |  
+| RN50           | 8               |   bilinear  | 46.348%                                   |
+|    \           |   \             |    56.782%    (directly zero-shot inference)            |
+There might be 2 hiddne reasons:
+1. Weakness of generability to CIFAR10
+SRGAN only trains on some classic datasets for super resolution task, such as Set5, Set14, as well as the ImageNet
+
+
+We're now trying to transfer learning work of adapting the 
 
 我们的方法是，将SRGAN的生成器迁移到cifar10数据集上，即基于
 
