@@ -150,7 +150,7 @@ We input the noisy CIFAR10 images with JPEG compression, and train it with the g
 
 We used SSIM loss (1-SSIM) as training loss, and the metric on test set is MSE.
 
-<img src="imgs/vit_clip.png" width="500">
+<img src="imgs/vit_clip.png" width="700">
 
 | JPEG compression quality  |   MSE   | 
 |---------------------------|--------------------------------------------|
