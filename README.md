@@ -66,7 +66,9 @@ We choose jpeg compression rate of **50%** as example to show the resulting effe
 |    \           |   \             |  \ |  56.782%    (directly zero-shot inference)         |
 
 The hidden reason might be that:
+
 Dataset like ImageNet has an original size of 224x224, which makes their low-resolution versions still interpretable (the smallest version at scale=8 is still 28x28).
+
 However, the original image size of CIFAR10 is 32x32, which makes its images of the smallest size (scale=8) only 4x4, such small images could hardly learn anything.
 
 Therefore, it seems much harder for transfer learning on imageset like CIFAR10.
