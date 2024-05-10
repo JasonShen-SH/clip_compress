@@ -18,36 +18,43 @@ The authors did not analyze this difference in the paper, but we believe it coul
 Therefore, we focus on **improving JPEG Artifact Correction** for images with **small resolution** in our work.
 
 ## Methodologies (Still improving)
-### Operations on image features
+### Section1: Operations on image features
 One way to achieve compression while preventing the jpeg issue is to compress the image features instead of images themselves.
 
-#### Feature quantization
+#### Method 1.1: Feature quantization
+We assume the features to be clean here (i.e., no extra gaussian noise was added), and would like to see whether quantization could save space while achieve comparable performance.
+
 We choose Post-train Quantization (PTQ) as the quantization method, the design of quantization process is as follows:
 
 <img src="imgs/quantizer.png" width="500">
 
-We test our result on CIFAR10 test set (10000 samples)
+We used CIFAR10 test set for direct inference on CLIP model.
+
+We also add a meta-net followed the encoded image features for classification task.
+
 | All digits     | Integer digits  |    Accuracy (CLIP's zero-shot prediction)    |  Classification Accuracy (meta-net for classifier)  |  
 |----------------|-----------------|----------------------------------------------|-----------------------------------------------------|
 | 12             | 8               |    92%                                       |    95.08%                                           |
 | 8              | 4               |    88.5%                                     |    94.48%                                           |
 
 
-#### The denoise of image features
+#### Method 1.2: Denoise of image features
 The method is based on the assumption that it's the **image features** who are transmitted, instead of **compressed images** themselves.
 
 <img src="imgs/autoencoder_image.png" width="500">
 
-We add random gaussian noise to simulate the noise within the channel, this would be improved.
+We introduce random Gaussian noise to simulate channel interference.
 
-Besides, we also used the 128 feature size for classification task by adding a meta net.
+The goal is to reconstruct the noisy image features back to their clean state at the receiver.
+
+Additionally, we have employed a feature size of 128 for the classification task by integrating a meta-network.
 
 |    Accuracy (CLIP's zero-shot prediction)    |  Classification Validation Accuracy (meta-net on 128-dimension feature)  |  
 |----------------|-----------------|
 | 73%            |    100%  |
 
 
-### Operations on image itself 
+### Section2: Operations on image itself 
 The core ideas behind operations on image itself is to correct jpeg artifacts at the receiver before going into CLIP's image encoder.
 
 <img src="imgs/core_idea.png" width="500">
@@ -59,7 +66,7 @@ If training is conducted, both training and testing are performed on the CIFAR10
 If no training is involved, inference is directly carried out on the CIFAR10 test set using the pretrained CLIP model.
 
 
-#### SRGAN_based super resolution
+#### Method 2.1: SRGAN_based super resolution
 Note that besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We tried to combine these two processes as the SR(super-resolution) process.
 
 <img src="imgs/SRGAN.png" width="500">
@@ -69,6 +76,8 @@ SRGAN provides various magnification scales, including <code>*2, *4, and *8</cod
 Our approach is as follows:
 
 <img src="imgs/SRGAN_CLIP.png" width="700">
+
+**SRGAN and further interpolation** serve as the artifact correction process before the image going into CLIP encoder.
 
 We first attempted to perform direct inference on the CIFAR10 dataset using the pretrained SRGAN (Generator & Discriminator).
 
@@ -96,7 +105,7 @@ Therefore, it seems much harder for transfer learning on imageset like CIFAR10.
 
 If we have to do super-resolution, we might first need to scale the original image, or otherwise the learning would be impossible.
 
-#### DCNN_Denoise
+#### Method 2.2: DCNN_Denoise
 DCNN Denoise serves as a poineer work in image denoising, better suited for JPEG artifact correction tasks compared to SRGAN. 
 
 Its approach uses a residual network to estimate the residuals caused by JPEG compression. The images initially undergo a conversion from RGB to YCbCr, followed by the residual network learning the artifacts produced by JPEG quantization.
@@ -118,7 +127,7 @@ We conducted transfer learning on the pretrained model. For each jpeg compressio
 
 We've also tested other image artifact correction models, such as **DDRM (JPEG Artifact Correction using Denoising Diffusion Restoration Models)**, we're still progressing with it.
 
-### Vision Transformer (train from scratch)
+### Method 2.3: Vision Transformer (train from scratch)
 We've added an ViT decoder at the end of the proposed ViT architecture, this is made to recontruct images from encoded features.
 <img src="imgs/vit.png" width="500">
 
@@ -141,8 +150,7 @@ However, the model currently achieves rather poor performance (learns nothing), 
 |50%                   |  10%   |
 |75%                   | 10%  |
 
-
-### CNN-Based Encoder-Decoder
+We've also built a simple encoder-decoder architecture for artifact removal, and it faces the same problem as with vision transformer.
 
 ## Next Step
 So far, the main issue with **Operations on the image itself** is that, even though images can be restored very well (as reflected in MSE and SSIM, as well as visualization results);
