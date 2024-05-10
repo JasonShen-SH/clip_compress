@@ -125,7 +125,7 @@ We utilize it for artifact correction and scale it to the required CLIP dimensio
 
 Specifically, we conducted transfer learning on the pretrained model. For each JPEG compression quality level (25%, 50%, 75%), we trained a specific model.
 
-<img src="imgs/dcnn_CLIP.png" width="500">
+<img src="imgs/dcnn_CLIP.png" width="700">
 
 | compression quality | SSIM  |  PSNR | 
 |-----|--------|---|
