@@ -26,7 +26,7 @@ We assume the features to be clean here (i.e., no extra gaussian noise was added
 
 We choose Post-train Quantization (PTQ) as the quantization method, the design of quantization process is as follows:
 
-<img src="imgs/quantizer.png" width="500">
+<img src="imgs/quantizer.png" width="700">
 
 We used CIFAR10 test set for direct inference on CLIP model.
 
@@ -41,7 +41,7 @@ We also add a meta-net followed the encoded image features for classification ta
 #### Method 1.2: Denoise of image features
 The method is based on the assumption that it's the **image features** who are transmitted, instead of **compressed images** themselves.
 
-<img src="imgs/autoencoder_image.png" width="500">
+<img src="imgs/autoencoder_image.png" width="700">
 
 We introduce random Gaussian noise to simulate channel interference.
 
