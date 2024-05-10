@@ -62,7 +62,7 @@ Additionally, we have employed a feature size of 128 for the classification task
 ### Section2: Operations on image itself 
 The core ideas behind operations on image itself is to correct jpeg artifacts at the receiver before going into CLIP's image encoder.
 
-<img src="imgs/core_idea.png" width="500">
+<img src="imgs/core_idea.png" width="700">
 
 In practice, the input consists of JPEG-compressed images, representing images received by the receiver, while the supervision labels are the clean, uncompressed images from CIFAR10.
 
@@ -76,7 +76,7 @@ Paper referred: *Photo-Realistic Single Image Super-Resolution Using a Generativ
 
 Note that besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We tried to combine these two processes as the SR(super-resolution) process.
 
-<img src="imgs/SRGAN.png" width="500">
+<img src="imgs/SRGAN.png" width="700">
 
 SRGAN provides various magnification scales, including <code>*2, *4, and *8</code>. Given the characteristic of CIFAR10 images being 32x32, we opt for <code>*4 and *8</code> magnification scales. 
 
