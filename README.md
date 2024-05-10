@@ -65,7 +65,7 @@ We choose jpeg compression rate of **50%** as example to show the resulting effe
 | RN50           | 8               |   bilinear  | 46.348%                                   |
 |    \           |   \             |  \ |  56.782%    (directly zero-shot inference)         |
 
-The hidden reason might be that:
+The hidden reason for SRGAN's poorer performance might be that:
 
 Dataset like ImageNet has an original size of 224x224, which makes their low-resolution versions still interpretable (the smallest version at scale=8 is still 28x28).
 
