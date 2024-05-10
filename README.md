@@ -39,7 +39,8 @@ The method is based on the assumption that it's the **image features** who are t
 
 ### Operations on image itself 
 #### SRGAN_based super resolution
-As besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We denote this process as the SR(super-resolution process).
+Besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We combine these two processes as the SR(super-resolution) process.
+
 <img src="imgs/SRGAN.png" width="500">
 
 SRGAN provides various magnification scales, including <code>*2, *4, and *8</code>. Given the characteristic of CIFAR10 images being 32x32, we opt for *4 and *8 magnification scales. 
