@@ -115,7 +115,24 @@ We've also tested other image artifact correction models, such as **DDRM (JPEG A
 We've added an ViT decoder at the end of the proposed ViT architecture, this is made to recontruct images from encoded features.
 <img src="imgs/vit.png" width="500">
 
-We input the noisy CIFAR10 images with JPEG compression, and train it with the ground truth of clean images.
+We input the noisy CIFAR10 images with JPEG compression, and train it with the ground truth of clean images. 
+
+We used SSIM loss (1-SSIM) as training loss, and the metric on test set is MSE.
+
+| JPEG compression quality  |   MSE   | 
+|---------------------------|--------------------------------------------|
+|25%                         |     0.0023                            |
+|50%                   |  0.0014   |
+|75%                   | 0.0011  |
+
+The visualization of the reconstructed image look good perceptually. 
+
+However, the model currently achieves rather poor performance (learns nothing), which might be attributed to insufficient training epochs or other underlying environment issues.
+| JPEG compression quality  |   Accuracy (CLIP's zero-shot prediction)    | 
+|---------------------------|--------------------------------------------|
+|25%                         |   10%                           |
+|50%                   |  10%   |
+|75%                   | 10%  |
 
 
 ### CNN-Based Encoder-Decoder
@@ -127,7 +144,7 @@ However, the zero-shot inference performance of the CLIP model has not been idea
 
 Moving forward, we plan to conduct more extensive work on CLIP model, rather than merely focusing on zero-shot inference.
 
-A simple example would be to consider not only the **reconstruction losses (such as MSE and SSIM)** during the training of the denoising module but also the **contrastive loss** of CLIP model.
+A simple example would be to consider not only the **reconstruction losses (such as MSE and SSIM)** during the training of the denoising module but also the **contrastive loss of CLIP model**.
 This approach would allow the denoising module to put more emphasis on its performance in the CLIP context.
 
 
