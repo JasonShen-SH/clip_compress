@@ -29,7 +29,7 @@ We test our result on CIFAR10 test set (10000 samples)
 
 
 #### The denoise of image features
-The method is based on the assumption that image features are transmitted, rather than transmitting the images themselves after undergoing JPEG compression.
+The method is based on the assumption that it's the **image features** who are transmitted, instead of **compressed images** themselves.
 <img src="imgs/autoencoder_image.png" width="500">
 <img src="imgs/autoencoder_image_text.png" width="500">
 | All digits     | Integer digits  |    Accuracy (CLIP's zero-shot prediction)    |  Classification Accuracy (meta-net for classifier)  |  
