@@ -3,7 +3,7 @@
 ## Literature Review
 The paper **"Understanding the Vulnerability of CLIP to Image Compression"** highlights the sensitivity of CLIP regarding jpeg compression of images when performing zero-shot recognition task.
 
-Specifically, for imageset like CIFAR10, the higher the compression ratio is, the poorer performance CLIP would have.
+Specifically, for imageset like CIFAR10, the higher the compression ratio is, the poorer performance CLIP would have. The author used JPEG compression quality of 25%, 50% and 75% respectively in the paper.
 <div style="display: flex; justify-content: space-around;">
   <img src="imgs/cifar10.png" width="500">
   <img src="imgs/stl10.png" width="500">
@@ -11,17 +11,18 @@ Specifically, for imageset like CIFAR10, the higher the compression ratio is, th
 <p style="text-align: center;">Average precision of CLIP predictions over the test dataset from cifar10/stl10 across different image qualities.</p>
 
 ## Main problems and objectives
-The performance decline due to JPEG compression is much more significant for the CIFAR10 dataset compared to STL10, where the decrease is not particularly notable. 
+The performance drop due to JPEG compression is much more significant on the CIFAR10 dataset compared to STL10, where the decrease is not particularly notable. 
 
-The authors did not analyze this aspect in the paper, but we believe it could be attributed to the impact of **image size**. Since a 32x32 image inherently carries **limited information**, compression leads to a greater loss of detail. Additionally, the compression artifacts introduced by JPEG, such as **blocking effects, are exacerbated**, resulting in poorer performance.
+The authors did not analyze this difference in the paper, but we believe it could be attributed to the impact of **image size**. Since a 32x32 image inherently carries **limited information**, compression leads to a greater loss of detail. Additionally, the compression artifacts introduced by JPEG, such as **blocking effects, are exacerbated**, resulting in poorer performance.
 
-Therefore, we focus on **improving JPEG Artifact Correction** in our work.
+Therefore, we focus on **improving JPEG Artifact Correction** for images with **small resolution** in our work.
 
 ## Methodologies (Still improving)
 ### Operations on image features
+One way to achieve compression while preventing the jpeg issue is to compress the image features instead of images themselves.
 
 #### Image feature quantization
-We choose Post-train Quantization (PTQ) as quantization method, the design is as follows:
+We choose Post-train Quantization (PTQ) as the quantization method, the design of quantization process is as follows:
 
 <img src="imgs/quantizer.png" width="500">
 
