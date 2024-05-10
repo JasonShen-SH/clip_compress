@@ -44,10 +44,14 @@ Besides artifact correction, we also need to scale the image to 224*224 as is re
 <img src="imgs/SRGAN.png" width="500">
 
 SRGAN provides various magnification scales, including <code>*2, *4, and *8</code>. Given the characteristic of CIFAR10 images being 32x32, we opt for *4 and *8 magnification scales. 
+
 Our approach is as follows:
+
 <img src="imgs/SRGAN_CLIP.png" width="500">
-First, we attempt to perform direct inference on the CIFAR10 dataset using the pretrained SRGAN (Generator & Discriminator).
-(We take the jpeg compression rate of **50%** as instance)
+
+We first attempted to perform direct inference on the CIFAR10 dataset using the pretrained SRGAN (Generator & Discriminator).
+
+We choose jpeg compression rate of **50%** as example to show the resulting effect:
 | CLIP pretrained model  | SRGAN scale  |  interpolation method | Accuracy (CLIP's zero-shot prediction)  |  
 |----------------|-----------------|-------------------|--------------------------|
 | ViT-B/32       | 4               |    bicubic  | 55.474%                                   |
