@@ -52,6 +52,13 @@ The core ideas behind operations on image itself is to correct jpeg artifacts at
 
 <img src="imgs/core_idea.png" width="500">
 
+In practice, the input consists of JPEG-compressed images, representing images received by the receiver, while the supervision labels are the clean, uncompressed images from CIFAR10.
+
+If training is conducted, both training and testing are performed on the CIFAR10 train set and test set. 
+
+If no training is involved, inference is directly carried out on the CIFAR10 test set using the pretrained CLIP model.
+
+
 #### SRGAN_based super resolution
 Note that besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We tried to combine these two processes as the SR(super-resolution) process.
 
@@ -122,8 +129,8 @@ We used SSIM loss (1-SSIM) as training loss, and the metric on test set is MSE.
 | JPEG compression quality  |   MSE   | 
 |---------------------------|--------------------------------------------|
 |25%                         |     0.0023                            |
-|50%                   |  0.0014   |
-|75%                   | 0.0011  |
+|50%                   |  0.0016   |
+|75%                   | 0.0012  |
 
 The visualization of the reconstructed image look good perceptually. 
 
