@@ -91,6 +91,13 @@ We conducted transfer learning on the pretrained model. For each jpeg compressio
 | 50% | 0.9608 | 32.4002 |
 | 75% | 0.9755 | 34.6168 |        
 
+| JPEG compression quality  |   Accuracy (CLIP's zero-shot prediction)   | 
+|---------------------------|--------------------------------------------|
+|25%                         |    52.484%                               |
+|50%                   |        66.091%   |
+|75%                   |     73.032%   |
+
+
 We've also tested other image artifact correction models, such as **DDRM (JPEG Artifact Correction using Denoising Diffusion Restoration Models)**, we're still progressing with it.
 
 ### Vision Transformer (from scratch)
