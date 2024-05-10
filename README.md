@@ -15,7 +15,7 @@ The authors did not analyze this aspect in the paper, but we believe it could be
 
 Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 
-## Methodologies (I'm improving)
+## Methodologies (Still improving)
 ### Operations on image features
 
 #### Image feature quantization
