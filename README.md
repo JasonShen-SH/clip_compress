@@ -19,12 +19,13 @@ Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 ### Operations on image features
 
 #### Image feature quantization
-Post-train Quantization (PTQ)
+We choose Post-train Quantization (PTQ) as quantization method, the design is as follows:
+<img src="imgs/quantizer.png" width="500">
+We test our result on CIFAR10 test set (10000 samples)
 | All digits     | Integer digits  |    Accuracy (CLIP's zero-shot prediction)    |  Classification Accuracy (meta-net for classifier)  |  
 |----------------|-----------------|----------------------------------------------|-----------------------------------------------------|
 | 12             | 8               |    92%                                       |    95.08%                                           |
 | 8              | 4               |    88.5%                                     |    94.48%                                           |
-<img src="imgs/quantizer.png" width="500">
 
 
 #### The denoise of image features
@@ -49,7 +50,7 @@ SRGAN provides various magnification scales, including <code>*2, *4, and *8</cod
 Our approach is as follows:
 <img src="imgs/SRGAN_CLIP.png" width="500">
 First, we attempt to perform direct inference on the CIFAR10 dataset using the pretrained SRGAN (Generator & Discriminator).
-(We take the jpeg compression rate of 50% as instance)
+(We take the jpeg compression rate of **50%** as instance)
 | CLIP pretrained model  | SRGAN scale  |  interpolation method | Accuracy (CLIP's zero-shot prediction)  |  
 |----------------|-----------------|-------------------|--------------------------|
 | ViT-B/32       | 4               |    bicubic  | 55.474%                                   |
@@ -68,11 +69,20 @@ However, the original image size of CIFAR10 is 32*32, which makes its images of 
 
 Therefore, it seems hard for transfer learning as we might first need to scale original image, or otherwise the learning would be impossible.
 
-#### DCNN_based 
+#### DCNN_Denoise
+DCNN Denoise serves as a poineer work in image denoising, better suited for JPEG artifact correction tasks compared to SRGAN. 
 
-We're now trying to transfer learning work of adapting the 
+Its approach uses a residual network to estimate the residuals caused by JPEG compression. The images initially undergo a conversion from RGB to YCbCr, followed by the residual network learning the artifacts produced by JPEG quantization.
+<img src="imgs/DCNN.png" width="500">
 
-我们的方法是，将SRGAN的生成器迁移到cifar10数据集上，即基于
+We conducted transfer learning on the DCNN: training the pretrained model on the CIFAR10 dataset, which had undergone various degrees of JPEG compression (25, 50, 75).
+| compression quality | SSIM  |  PSNR | 
+|----------------|-----------------|-------------------|
+| 25% | 0.9339 | 29.9081 |
+| 50% | 0.9608 | 32.4002 |
+| 75% | 0.9755 | 34.6168 |        
+
+
 
 Feature Quantization: Quantizing the number of bits used for each feature. An experiment using 1000 images from the X_test set demonstrated that reducing the precision of features slightly affects test accuracy but can be compensated with a simple meta-net classifier. For instance:
 12 bits integer and 8 bits decimal portion resulted in 92% accuracy with CLIP and 95.08% with the classifier.
