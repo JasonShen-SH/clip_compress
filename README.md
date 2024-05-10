@@ -13,7 +13,7 @@ Specifically, for imageset like CIFAR10, the higher the compression ratio is, th
 ## Main problems and objectives
 The performance drop due to JPEG compression is much more significant on the CIFAR10 dataset compared to STL10, where the decrease is not particularly notable. 
 
-The authors did not analyze this difference in the paper, but we believe it could be attributed to the impact of **image size**. Since a 32x32 image inherently carries **limited information**, compression leads to a greater loss of detail. Additionally, the compression artifacts introduced by JPEG, such as **blocking effects, are exacerbated**, resulting in poorer performance.
+The authors did not analyze this difference in the paper, but we believe it could be attributed to the impact of **image size**. Since a 32x32 image inherently carries **limited information**, compression leads to a greater loss of detail. Additionally, the compression artifacts introduced by JPEG, such as **blocking effects**, are exacerbated, resulting in poorer performance.
 
 Therefore, we focus on **improving JPEG Artifact Correction** for images with **small resolution** in our work.
 
