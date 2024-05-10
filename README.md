@@ -21,6 +21,7 @@ Therefore, we focus on **improving JPEG Artifact Correction** in our work.
 #### Image feature quantization
 We choose Post-train Quantization (PTQ) as quantization method, the design is as follows:
 <img src="imgs/quantizer.png" width="500">
+
 We test our result on CIFAR10 test set (10000 samples)
 | All digits     | Integer digits  |    Accuracy (CLIP's zero-shot prediction)    |  Classification Accuracy (meta-net for classifier)  |  
 |----------------|-----------------|----------------------------------------------|-----------------------------------------------------|
