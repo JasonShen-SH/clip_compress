@@ -140,6 +140,8 @@ Specifically, we conducted transfer learning on the pretrained model. For each J
 |50%                   |        66.091%   |
 |75%                   |     73.032%   |
 
+(ViT-B/32 as CLIP's pretrained model)
+
 Note: We've also tested other image artifact correction models, such as **DDRM (JPEG Artifact Correction using Denoising Diffusion Restoration Models)**, we're still progressing with it.
 
 ### Method 2.3: Vision Transformer (train from scratch)
@@ -167,6 +169,8 @@ However, the model currently achieves rather poor performance (learns nothing), 
 |25%                         |   10%                           |
 |50%                   |  10%   |
 |75%                   | 10%  |
+
+(ViT-B/32 as CLIP's pretrained model)
 
 Note: We've also built a simple encoder-decoder architecture for artifact removal, and it faces the same problem as with vision transformer.
 
