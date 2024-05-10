@@ -46,7 +46,7 @@ Besides artifact correction, we also need to scale the image to 224*224 as is re
 
 <img src="imgs/SRGAN.png" width="500">
 
-SRGAN provides various magnification scales, including <code>*2, *4, and *8</code>. Given the characteristic of CIFAR10 images being 32x32, we opt for *4 and *8 magnification scales. 
+SRGAN provides various magnification scales, including <code>*2, *4, and *8</code>. Given the characteristic of CIFAR10 images being 32x32, we opt for <code>*4 and *8</code> magnification scales. 
 
 Our approach is as follows:
 
