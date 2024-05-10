@@ -64,11 +64,13 @@ We choose jpeg compression rate of **50%** as example to show the resulting effe
 | RN50           | 4               |    bilinear  | 46.348%                                  |  
 | RN50           | 8               |   bilinear  | 46.348%                                   |
 |    \           |   \             |  \ |  56.782%    (directly zero-shot inference)         |
-The hidden reason might be that:
-Dataset like ImageNet has original size of 224*224, which makes images of the smallest size (scale=8) 28*28.
-However, the original image size of CIFAR10 is 32*32, which makes its images of the smallest size (scale=8) only 4*4, and could hardly learn anything.
 
-Therefore, it seems hard for transfer learning as we might first need to scale original image, or otherwise the learning would be impossible.
+The hidden reason might be that:
+Dataset like ImageNet has original size of 224*224, which makes their low-resolution versions still interpretable (the smallest size (scale=8) is still 28*28).
+However, the original image size of CIFAR10 is 32*32, which makes its images of the smallest size (scale=8) only 4*4, such small image could hardly learn anything.
+
+Therefore, it seems much harder for transfer learning on imageset like CIFAR10.
+If we have to do super-resolution, we might first need to scale the original image, or otherwise the learning would be impossible.
 
 #### DCNN_Denoise
 DCNN Denoise serves as a poineer work in image denoising, better suited for JPEG artifact correction tasks compared to SRGAN. 
