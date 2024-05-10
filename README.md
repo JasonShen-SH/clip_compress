@@ -47,7 +47,7 @@ SRGAN provides various magnification scales, including <code>*2, *4, and *8</cod
 
 Our approach is as follows:
 
-<img src="imgs/SRGAN_CLIP.png" width="500">
+<img src="imgs/SRGAN_CLIP.png" width="700">
 
 We first attempted to perform direct inference on the CIFAR10 dataset using the pretrained SRGAN (Generator & Discriminator).
 
