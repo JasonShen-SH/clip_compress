@@ -35,6 +35,7 @@ We test our result on CIFAR10 test set (10000 samples)
 
 #### The denoise of image features
 The method is based on the assumption that it's the **image features** who are transmitted, instead of **compressed images** themselves.
+
 <img src="imgs/autoencoder_image.png" width="500">
 
 We add random gaussian noise to simulate the noise within the channel, this would be improved.
@@ -48,10 +49,11 @@ Besides, we also used the 128 feature size for classification task by adding a m
 
 ### Operations on image itself 
 The core ideas behind operations on image itself is to correct jpeg artifacts at the receiver before going into CLIP's image encoder.
+
 <img src="imgs/core_idea.png" width="500">
 
 #### SRGAN_based super resolution
-Besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We combine these two processes as the SR(super-resolution) process.
+Note that besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We tried to combine these two processes as the SR(super-resolution) process.
 
 <img src="imgs/SRGAN.png" width="500">
 
@@ -116,15 +118,26 @@ We've added an ViT decoder at the end of the proposed ViT architecture, this is 
 We input the noisy CIFAR10 images with JPEG compression, and train it with the ground truth of clean images.
 
 
-
 ### CNN-Based Encoder-Decoder
 
 ## Next Step
-Till now, the main problem with **Opertions on image itself** is that, even if images could be 复原的非常好（这体现在与clean image极小的MSE和SSIM，以及可视化结果);
+So far, the main issue with **Operations on the image itself** is that, even though images can be restored very well (as reflected in MSE and SSIM, as well as visualization results);
 
-但是，CLIP模型的zero-shot inference 却一直不太理想。
+However, the zero-shot inference performance of the CLIP model has not been ideal.
 
-下一步我们考虑
+Moving forward, we plan to conduct more extensive work on CLIP model, rather than merely focusing on zero-shot inference.
+
+A simple example would be to consider not only the **reconstruction losses (such as MSE and SSIM)** during the training of the denoising module but also the **contrastive loss** of CLIP model.
+This approach would allow the denoising module to put more emphasis on its performance in the CLIP context.
+
+
+
+
+
+
+
+
+
 
 Feature Quantization: Quantizing the number of bits used for each feature. An experiment using 1000 images from the X_test set demonstrated that reducing the precision of features slightly affects test accuracy but can be compensated with a simple meta-net classifier. For instance:
 12 bits integer and 8 bits decimal portion resulted in 92% accuracy with CLIP and 95.08% with the classifier.
