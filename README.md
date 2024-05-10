@@ -96,12 +96,11 @@ We choose jpeg compression rate of **50%** as example to show the resulting effe
 | ViT-B/32       | 8               |    bicubic  | 55.474%                                   |
 | ViT-B/32       | 4               |    bilinear | 56.224%                                   |
 | ViT-B/32       | 8               |    bilinear | 56.224%                                   |
-|    \           |   \             |  \ |  65.09%   (directly zero-shot inference)           |
 | RN50           | 4               |    bicubic  | 45.968%                                   |  
 | RN50           | 8               |   bicubic  | 45.968%                                    |
 | RN50           | 4               |    bilinear  | 46.348%                                  |  
 | RN50           | 8               |   bilinear  | 46.348%                                   |
-|    \           |   \             |  \ |  56.782%    (directly zero-shot inference)         |
+|    \           |   \             |  \ |  65.09%   (directly zero-shot inference)           |
 
 The hidden reason for SRGAN's poorer performance might be that:
 
