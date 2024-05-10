@@ -34,13 +34,7 @@ We test our result on CIFAR10 test set (10000 samples)
 The method is based on the assumption that it's the **image features** who are transmitted, instead of **compressed images** themselves.
 <img src="imgs/autoencoder_image.png" width="500">
 <img src="imgs/autoencoder_image_text.png" width="500">
-| All digits     | Integer digits  |    Accuracy (CLIP's zero-shot prediction)    |  Classification Accuracy (meta-net for classifier)  |  
-|----------------|-----------------|----------------------------------------------|-----------------------------------------------------|
-| 12             | 8               |    92%                                       |    95.08%                                           |
-| 8              | 4               |    88.5%                                     |    94.48%                                           |
 
-1. Optimizing the Features Extracted by CLIP's Image Encoder
-Initially, CLIP conducts inference using 512-dimensional image and text features necessary for zero-shot inference. However, after feature dimensionality reduction, direct inference using the pre-trained CLIP model is not feasible. Instead, a simple classifier is constructed for backend classification tasks. This involves examining if using the reduced features, after minimal training (like 10 epochs), can perform classification effectively. The process includes:
 
 
 ### Operations on image itself 
