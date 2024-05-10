@@ -41,7 +41,7 @@ Initially, CLIP conducts inference using 512-dimensional image and text features
 
 
 ### Operations on image itself 
-1. Based on SRGAN
+#### SRGAN_based super resolution
 As besides artifact correction, we also need to scale the image to 224*224 as is required by CLIP's image encoder. We denote this process as the SR(super-resolution process).
 <img src="imgs/SRGAN.png" width="500">
 
@@ -56,16 +56,19 @@ First, we attempt to perform direct inference on the CIFAR10 dataset using the p
 | ViT-B/32       | 8               |    bicubic  | 55.474%                                   |
 | ViT-B/32       | 4               |    bilinear | 56.224%                                   |
 | ViT-B/32       | 8               |    bilinear | 56.224%                                   |
-|    \           |   \             |    65.09%   (directly zero-shot inference)              |
+|    \           |   \             |  \ |  65.09%   (directly zero-shot inference)              |
 | RN50           | 4               |    bicubic  | 45.968%                                   |  
 | RN50           | 8               |   bicubic  | 45.968%                                   |
 | RN50           | 4               |    bilinear  | 46.348%                                   |  
 | RN50           | 8               |   bilinear  | 46.348%                                   |
-|    \           |   \             |    56.782%    (directly zero-shot inference)            |
-There might be 2 hiddne reasons:
-1. Weakness of generability to CIFAR10
-SRGAN only trains on some classic datasets for super resolution task, such as Set5, Set14, as well as the ImageNet
+|    \           |   \             |  \ |  56.782%    (directly zero-shot inference)            |
+The hidden reason might be that:
+Dataset like ImageNet has original size of 224*224, which makes images of the smallest size (scale=8) 28*28.
+However, the original image size of CIFAR10 is 32*32, which makes its images of the smallest size (scale=8) only 4*4, and could hardly learn anything.
 
+Therefore, it seems hard for transfer learning as we might first need to scale original image, or otherwise the learning would be impossible.
+
+#### DCNN_based 
 
 We're now trying to transfer learning work of adapting the 
 
