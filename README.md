@@ -37,6 +37,7 @@ We also add a meta-net followed the encoded image features for classification ta
 | 12             | 8               |    92%                                       |    95.08%                                           |
 | 8              | 4               |    88.5%                                     |    94.48%                                           |
 
+(ViT-B/32 as CLIP's pretrained model)
 
 #### Method 1.2: Denoise of image features
 The method is based on the assumption that it's the **image features** who are transmitted, instead of **compressed images** themselves.
@@ -53,7 +54,7 @@ Additionally, we have employed a feature size of 128 for the classification task
 |----------------|-----------------|
 | 73%            |    100%  |
 
-
+(ViT-B/32 as CLIP's pretrained model)
 
 
 <p></p>
