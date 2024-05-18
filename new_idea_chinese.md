@@ -2,7 +2,7 @@
 
 学长好！感谢您的时间
 
-上周五我和Deniz讨论了下，我在之前的4月份自己摸索着做了一些工作，学长可参考[之前的工作](https://github.com/JasonShen-SH/clip_compress/blob/main/README.md)，整理的比较完整，
+上周五我和Deniz讨论了下，我在之前的4月份自己摸索着做了一些工作，学长可参考[之前的工作](https://github.com/JasonShen-SH/clip_compress/blob/main/README.md)，整理的比较完整和清楚；
 
 但是我的方向可能出现了一些问题，就是这些工作的objective都是为了进一步提升CLIP的性能；具体来说,这些工作都是"通信模块+CLIP"的方式，也就是CLIP是在接收端，具体学长可以见链接；
 
@@ -34,6 +34,8 @@
 
 二个是基于swin-transformer的DeepJSCC-l++能否有潜力支持多模态信息的传输，例如，是否支持文本信息？具体来说，对于CLIP的下游任务，我不敢保证仅仅依靠image features就可以完成所有类型的任务，毕竟CLIP是image+text的集大成者；
 因此，不知多模态的信息传输在目前的框架（可拓展）下是否具备拓展并实现的可能性？若有，这可能是使用DeepJSCC进行多模态传输的首次尝试。
+
+初学者，相信肯定有一些地方考虑不到位，恳亲学长指点和建议！
 
 祝好！
 
