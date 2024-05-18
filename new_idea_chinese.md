@@ -32,7 +32,7 @@
 所以关于diamond部分，有2个问题想请教：
 一个是这样一套传输image feature而不是images的方案，能否同样具备潜力，在基于swin-transformer的DeepJSCC-l++中实现，只要有潜力实现我就一定去做出来，主要是担心万一完全不具备这个可能性，因此确认下；
 
-二个是基于swin-transformer的DeepJSCC-l++能否有潜力支持多模态信息的传输，例如，是否支持文本信息？具体来说，对于CLIP的下游任务，我不敢保证仅仅依靠image features就可以完成所有类型的任务，毕竟CLIP是image+text；
+二个是基于swin-transformer的DeepJSCC-l++能否有潜力支持多模态信息的传输，例如，是否支持文本信息？具体来说，对于CLIP的下游任务，我不敢保证仅仅依靠image features就可以完成所有类型的任务，毕竟CLIP是image+text的集大成者；
 因此，不知多模态的信息传输在目前的框架（可拓展）下是否具备拓展并实现的可能性？若有，这可能是使用DeepJSCC进行多模态传输的首次尝试。
 
 祝好！
