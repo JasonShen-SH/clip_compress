@@ -13,7 +13,7 @@
 
 <img src="imgs/new_plan.png" width="1000">
 
-具体来说，我们不再传输整个图像，而只发送CLIP的image encoder编码后的image features。这些image features可以支持多种下游任务，如图像分类和检索，但我们不需要关心在下游具体做什么具体的任务，我们只需要将features良好地发送到receiver即可，实际上，我们也无法知道具体的下游任务，等于说我们通过通信的方式搭建了一个接口。
+具体来说，我们不再传输整个图像，而只发送CLIP的image encoder编码后的image features。每个张图象的mage features是512维度（CLIP编码器规定）。这些image features可以支持多种下游任务，如图像分类和检索，但我们不需要关心在下游具体做什么具体的任务，我们只需要将features良好地发送到receiver即可，实际上，我们也无法知道具体的下游任务，等于说我们通过通信的方式搭建了一个接口。
 
 选择传输特征而不是完整图像的原因有两个：
 一是节省传输资源：通过仅传输特征（由 CLIP 图像编码器提取）而不是整个图像，我们可以节省带宽等资源。
