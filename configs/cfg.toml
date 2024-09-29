@@ -1,0 +1,14 @@
+['CHANNEL']
+channel_fade_std = 0.5
+channel_type = "awgn"
+subcarriers = 1024
+csi = true
+power = 1.0 # 默认归一化能量
+error_std = 0.01
+
+# 常见的搭配： 16QAM + 1024个subcarriers + AWGN， 但是AWGN一定没有任何的channel fading, 因为认为是没有幅度和相位的变化
+# 也没有csi，因为幅度和相位没有变化，还需要估计什么？！ 估计的就是多径效应后发生变化的幅度和相位
+# 当然也没有error_std，这里的error_std指的是csi中因估计channel state问题而导致的估计差
+# 理论上，如果没有外界环境因素，信号（例如单个子载波上）的幅度（强度）和相位，是不会变化的！
+
+# 详见 https://chatgpt.com/c/4d6d0b70-5700-42af-b853-5819310af746
