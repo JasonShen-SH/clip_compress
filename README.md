@@ -2,4 +2,8 @@
 
 (Initial commit) Code will be finalized within a week from September 30th.
 
-Please refer to the Powerpoint for introduction.
+Please refer to the Presentation for introduction.
+
+For any questiions, feel free to contact ruiqi.shen23@imperial.ac.uk
+
+
