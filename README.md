@@ -4,6 +4,6 @@
 
 Please refer to the Presentation for introduction.
 
-For any questiions, feel free to contact ruiqi.shen23@imperial.ac.uk
+For any questiions, feel free to raise issues or contact ruiqi.shen23@imperial.ac.uk
 
 
